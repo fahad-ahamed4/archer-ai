@@ -1,0 +1,101 @@
+# =========== Dependencies ===========
+node_modules/
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+bun.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# =========== Build Outputs ===========
+/.next/
+/out/
+/build/
+/dist/
+*.tsbuildinfo
+next-env.d.ts
+
+# =========== Production ===========
+.vercel
+
+# =========== Testing ===========
+/coverage/
+*.lcov
+
+# =========== Environment & Secrets ===========
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# =========== Logs ===========
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dev.log
+server.log
+dev.out.log
+dev.out.log.*
+tool-results/
+
+# =========== IDE & Editor ===========
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# =========== Cache & Temp ===========
+.cache/
+.cache
+*.cache
+.turbo/
+.eslintcache
+.stylelintcache
+.parcel-cache/
+.tmp/
+tmp/
+*.tmp
+
+# =========== Project Specific ===========
+# Skills directory (Z.ai specific - not part of source)
+/skills/
+# Upload & download artifacts
+/upload/
+/download/
+# Local development database
+db/*.db
+db/*.db-journal
+# Internal scaffolding
+/.zscripts/
+/.z-ai-config/
+/.claude/
+local-*
+prompt
+test
+worklog.md
+
+# =========== OS Specific ===========
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# =========== Misc ===========
+*.pid
+*.seed
+*.pid.lock
