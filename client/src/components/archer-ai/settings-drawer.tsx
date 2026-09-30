@@ -15,14 +15,20 @@ import {
   Monitor,
   Smartphone,
   Sparkles,
+  RefreshCw,
+  Loader2,
+  AlertCircle,
+  Clock,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { BrowserCapabilities } from "@/lib/browser-support";
-
-// GitHub repo info — update if you fork
-const GITHUB_REPO = "fahad-ahamed4/archer-ai";
-const GITHUB_RELEASES_URL = `https://github.com/${GITHUB_REPO}/releases/latest`;
-const GITHUB_ACTIONS_URL = `https://github.com/${GITHUB_REPO}/actions/workflows/build-release.yml`;
+import {
+  useLatestRelease,
+  formatFileSize,
+  formatReleaseDate,
+  GITHUB_RELEASES_PAGE,
+  GITHUB_ACTIONS_URL,
+} from "@/hooks/use-latest-release";
 
 interface SettingsDrawerProps {
   open: boolean;
@@ -45,6 +51,15 @@ export function SettingsDrawer({
 }: SettingsDrawerProps) {
   const drawerRef = useRef<HTMLDivElement>(null);
   const previouslyFocusedRef = useRef<HTMLElement | null>(null);
+  const {
+    release,
+    loading,
+    hasWindowsBuild,
+    hasAndroidBuild,
+    windowsAsset,
+    androidAsset,
+    refetch,
+  } = useLatestRelease();
 
   useEffect(() => {
     if (open) {
@@ -243,72 +258,177 @@ export function SettingsDrawer({
 
               {/* === DOWNLOAD APPS === */}
               <section>
-                <h3 className="text-[10px] font-mono font-bold tracking-widest text-primary mb-3 flex items-center gap-1.5">
-                  <Download className="w-3 h-3" aria-hidden="true" />
-                  DOWNLOAD APPS
-                </h3>
-                <div className="grid grid-cols-2 gap-2">
-                  {/* Windows download */}
-                  <a
-                    href={GITHUB_RELEASES_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col items-center gap-1 p-3 rounded-lg border border-cyan-400/30 bg-cyan-400/5 hover:bg-cyan-400/15 hover:border-cyan-400/60 transition-all"
-                    aria-label="Download Archer AI for Windows"
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-[10px] font-mono font-bold tracking-widest text-primary flex items-center gap-1.5">
+                    <Download className="w-3 h-3" aria-hidden="true" />
+                    DOWNLOAD APPS
+                  </h3>
+                  <button
+                    onClick={refetch}
+                    disabled={loading}
+                    className="text-muted-foreground hover:text-primary disabled:opacity-50 transition-colors"
+                    aria-label="Refresh release info"
+                    title="Check for new releases"
                   >
-                    <div className="w-9 h-9 rounded-full bg-cyan-400/15 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
-                      <Monitor className="w-5 h-5" />
-                    </div>
-                    <div className="text-[11px] font-mono font-bold tracking-wider text-cyan-300">
-                      WINDOWS
-                    </div>
-                    <div className="text-[9px] text-muted-foreground text-center">
-                      .exe installer
-                    </div>
-                    <div className="flex items-center gap-1 text-[9px] text-cyan-400 mt-0.5">
-                      <Download className="w-2.5 h-2.5" />
-                      <span>Download</span>
-                    </div>
-                  </a>
-
-                  {/* Android download */}
-                  <a
-                    href={GITHUB_RELEASES_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col items-center gap-1 p-3 rounded-lg border border-pink-400/30 bg-pink-400/5 hover:bg-pink-400/15 hover:border-pink-400/60 transition-all"
-                    aria-label="Download Archer AI for Android"
-                  >
-                    <div className="w-9 h-9 rounded-full bg-pink-400/15 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform">
-                      <Smartphone className="w-5 h-5" />
-                    </div>
-                    <div className="text-[11px] font-mono font-bold tracking-wider text-pink-300">
-                      ANDROID
-                    </div>
-                    <div className="text-[9px] text-muted-foreground text-center">
-                      .apk file
-                    </div>
-                    <div className="flex items-center gap-1 text-[9px] text-pink-400 mt-0.5">
-                      <Download className="w-2.5 h-2.5" />
-                      <span>Download</span>
-                    </div>
-                  </a>
+                    <RefreshCw className={cn("w-3 h-3", loading && "animate-spin")} />
+                  </button>
                 </div>
 
-                {/* Build status / trigger link */}
-                <div className="mt-3 px-3 py-2 rounded-md bg-violet-400/5 border border-violet-400/30 text-[10px] text-muted-foreground flex items-start gap-2">
-                  <Sparkles className="w-3 h-3 text-violet-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
-                  <div className="flex-1">
-                    <div className="text-violet-300 font-mono font-bold mb-0.5">AUTO-BUILD SYSTEM</div>
-                    <p className="leading-relaxed">
-                      Downloads the latest official build from GitHub Releases.
-                      If no build is available yet, you can trigger one manually via
-                      the <a href={GITHUB_ACTIONS_URL} target="_blank" rel="noopener noreferrer" className="text-violet-400 underline hover:text-violet-300">GitHub Actions workflow</a>.
-                    </p>
+                {/* Loading state */}
+                {loading && (
+                  <div className="flex items-center justify-center gap-2 py-6 text-[10px] text-muted-foreground font-mono">
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                    <span>Checking for releases...</span>
                   </div>
-                </div>
+                )}
 
-                {/* Coming soon note */}
+                {/* Release available — show direct download buttons */}
+                {!loading && release && (
+                  <>
+                    <div className="mb-2 px-3 py-1.5 rounded-md bg-primary/5 border border-primary/20 text-[9px] text-muted-foreground">
+                      <span className="text-primary font-mono font-bold">{release.tagName}</span>
+                      {release.publishedAt && (
+                        <span className="ml-2 flex items-center gap-1">
+                          <Clock className="w-2 h-2" aria-hidden="true" />
+                          {formatReleaseDate(release.publishedAt)}
+                        </span>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-2 gap-2">
+                      {/* Windows download */}
+                      {hasWindowsBuild && windowsAsset ? (
+                        <a
+                          href={windowsAsset.browser_download_url}
+                          download
+                          className="group flex flex-col items-center gap-1 p-3 rounded-lg border border-cyan-400/30 bg-cyan-400/5 hover:bg-cyan-400/15 hover:border-cyan-400/60 transition-all"
+                          aria-label={`Download ${windowsAsset.name}`}
+                          title={`Download ${windowsAsset.name} (${formatFileSize(windowsAsset.size)})`}
+                        >
+                          <div className="w-9 h-9 rounded-full bg-cyan-400/15 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                            <Monitor className="w-5 h-5" />
+                          </div>
+                          <div className="text-[11px] font-mono font-bold tracking-wider text-cyan-300">
+                            WINDOWS
+                          </div>
+                          <div className="text-[9px] text-muted-foreground text-center">
+                            {formatFileSize(windowsAsset.size)}
+                          </div>
+                          <div className="flex items-center gap-1 text-[9px] text-cyan-400 mt-0.5">
+                            <Download className="w-2.5 h-2.5" />
+                            <span>Download .exe</span>
+                          </div>
+                        </a>
+                      ) : (
+                        <div className="flex flex-col items-center gap-1 p-3 rounded-lg border border-muted/30 bg-muted/5 text-muted-foreground/70">
+                          <div className="w-9 h-9 rounded-full bg-muted/15 flex items-center justify-center">
+                            <Monitor className="w-5 h-5 opacity-50" />
+                          </div>
+                          <div className="text-[11px] font-mono font-bold tracking-wider">
+                            WINDOWS
+                          </div>
+                          <div className="text-[9px] text-center">Not in this release</div>
+                        </div>
+                      )}
+
+                      {/* Android download */}
+                      {hasAndroidBuild && androidAsset ? (
+                        <a
+                          href={androidAsset.browser_download_url}
+                          download
+                          className="group flex flex-col items-center gap-1 p-3 rounded-lg border border-pink-400/30 bg-pink-400/5 hover:bg-pink-400/15 hover:border-pink-400/60 transition-all"
+                          aria-label={`Download ${androidAsset.name}`}
+                          title={`Download ${androidAsset.name} (${formatFileSize(androidAsset.size)})`}
+                        >
+                          <div className="w-9 h-9 rounded-full bg-pink-400/15 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform">
+                            <Smartphone className="w-5 h-5" />
+                          </div>
+                          <div className="text-[11px] font-mono font-bold tracking-wider text-pink-300">
+                            ANDROID
+                          </div>
+                          <div className="text-[9px] text-muted-foreground text-center">
+                            {formatFileSize(androidAsset.size)}
+                          </div>
+                          <div className="flex items-center gap-1 text-[9px] text-pink-400 mt-0.5">
+                            <Download className="w-2.5 h-2.5" />
+                            <span>Download .apk</span>
+                          </div>
+                        </a>
+                      ) : (
+                        <div className="flex flex-col items-center gap-1 p-3 rounded-lg border border-muted/30 bg-muted/5 text-muted-foreground/70">
+                          <div className="w-9 h-9 rounded-full bg-muted/15 flex items-center justify-center">
+                            <Smartphone className="w-5 h-5 opacity-50" />
+                          </div>
+                          <div className="text-[11px] font-mono font-bold tracking-wider">
+                            ANDROID
+                          </div>
+                          <div className="text-[9px] text-center">Not in this release</div>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* View all releases link */}
+                    <a
+                      href={GITHUB_RELEASES_PAGE}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block mt-2 text-center text-[10px] text-muted-foreground hover:text-primary transition-colors underline"
+                    >
+                      View all releases on GitHub →
+                    </a>
+                  </>
+                )}
+
+                {/* No release yet — show trigger build prompt */}
+                {!loading && !release && (
+                  <>
+                    <div className="grid grid-cols-2 gap-2 opacity-50">
+                      <div className="flex flex-col items-center gap-1 p-3 rounded-lg border border-cyan-400/20 bg-cyan-400/5">
+                        <div className="w-9 h-9 rounded-full bg-cyan-400/15 flex items-center justify-center text-cyan-400">
+                          <Monitor className="w-5 h-5" />
+                        </div>
+                        <div className="text-[11px] font-mono font-bold tracking-wider text-cyan-300">
+                          WINDOWS
+                        </div>
+                        <div className="text-[9px] text-muted-foreground text-center">
+                          .exe installer
+                        </div>
+                      </div>
+                      <div className="flex flex-col items-center gap-1 p-3 rounded-lg border border-pink-400/20 bg-pink-400/5">
+                        <div className="w-9 h-9 rounded-full bg-pink-400/15 flex items-center justify-center text-pink-400">
+                          <Smartphone className="w-5 h-5" />
+                        </div>
+                        <div className="text-[11px] font-mono font-bold tracking-wider text-pink-300">
+                          ANDROID
+                        </div>
+                        <div className="text-[9px] text-muted-foreground text-center">
+                          .apk file
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="mt-3 px-3 py-2 rounded-md bg-amber-400/10 border border-amber-400/40 text-[10px] text-amber-300 flex items-start gap-2">
+                      <AlertCircle className="w-3 h-3 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                      <div className="flex-1">
+                        <div className="font-mono font-bold mb-0.5">NO BUILDS YET</div>
+                        <p className="leading-relaxed mb-2">
+                          No official builds have been released yet. You can trigger
+                          an automatic build via GitHub Actions.
+                        </p>
+                        <a
+                          href={GITHUB_ACTIONS_URL}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 px-2 py-1 rounded bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 font-mono text-[9px] transition-colors"
+                        >
+                          <Sparkles className="w-2.5 h-2.5" />
+                          Trigger Build
+                        </a>
+                      </div>
+                    </div>
+                  </>
+                )}
+
+                {/* Same AI note */}
                 <div className="mt-2 text-[9px] text-muted-foreground/70 text-center italic">
                   Windows & Android apps use the same AI as this website
                 </div>
