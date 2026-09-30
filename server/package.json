@@ -1,0 +1,23 @@
+{
+  "name": "archer-ai-server",
+  "version": "4.0.0",
+  "description": "Archer AI standalone backend server (optional - Next.js API routes are primary)",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch index.js",
+    "start": "node index.js",
+    "build": "echo 'No build step - JS only'"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "z-ai-web-dev-sdk": "^0.0.18",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/express": "^4.17.21",
+    "@types/cors": "^2.8.17"
+  }
+}

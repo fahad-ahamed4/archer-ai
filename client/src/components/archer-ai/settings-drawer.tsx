@@ -2,9 +2,27 @@
 
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Mic2, Volume2, VolumeX, Bot, User, Check, Activity } from "lucide-react";
+import {
+  X,
+  Mic2,
+  Volume2,
+  VolumeX,
+  Bot,
+  User,
+  Check,
+  Activity,
+  Download,
+  Monitor,
+  Smartphone,
+  Sparkles,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { BrowserCapabilities } from "@/lib/browser-support";
+
+// GitHub repo info — update if you fork
+const GITHUB_REPO = "fahad-ahamed4/archer-ai";
+const GITHUB_RELEASES_URL = `https://github.com/${GITHUB_REPO}/releases/latest`;
+const GITHUB_ACTIONS_URL = `https://github.com/${GITHUB_REPO}/actions/workflows/build-release.yml`;
 
 interface SettingsDrawerProps {
   open: boolean;
@@ -223,6 +241,79 @@ export function SettingsDrawer({
                 </section>
               )}
 
+              {/* === DOWNLOAD APPS === */}
+              <section>
+                <h3 className="text-[10px] font-mono font-bold tracking-widest text-primary mb-3 flex items-center gap-1.5">
+                  <Download className="w-3 h-3" aria-hidden="true" />
+                  DOWNLOAD APPS
+                </h3>
+                <div className="grid grid-cols-2 gap-2">
+                  {/* Windows download */}
+                  <a
+                    href={GITHUB_RELEASES_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col items-center gap-1 p-3 rounded-lg border border-cyan-400/30 bg-cyan-400/5 hover:bg-cyan-400/15 hover:border-cyan-400/60 transition-all"
+                    aria-label="Download Archer AI for Windows"
+                  >
+                    <div className="w-9 h-9 rounded-full bg-cyan-400/15 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+                      <Monitor className="w-5 h-5" />
+                    </div>
+                    <div className="text-[11px] font-mono font-bold tracking-wider text-cyan-300">
+                      WINDOWS
+                    </div>
+                    <div className="text-[9px] text-muted-foreground text-center">
+                      .exe installer
+                    </div>
+                    <div className="flex items-center gap-1 text-[9px] text-cyan-400 mt-0.5">
+                      <Download className="w-2.5 h-2.5" />
+                      <span>Download</span>
+                    </div>
+                  </a>
+
+                  {/* Android download */}
+                  <a
+                    href={GITHUB_RELEASES_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col items-center gap-1 p-3 rounded-lg border border-pink-400/30 bg-pink-400/5 hover:bg-pink-400/15 hover:border-pink-400/60 transition-all"
+                    aria-label="Download Archer AI for Android"
+                  >
+                    <div className="w-9 h-9 rounded-full bg-pink-400/15 flex items-center justify-center text-pink-400 group-hover:scale-110 transition-transform">
+                      <Smartphone className="w-5 h-5" />
+                    </div>
+                    <div className="text-[11px] font-mono font-bold tracking-wider text-pink-300">
+                      ANDROID
+                    </div>
+                    <div className="text-[9px] text-muted-foreground text-center">
+                      .apk file
+                    </div>
+                    <div className="flex items-center gap-1 text-[9px] text-pink-400 mt-0.5">
+                      <Download className="w-2.5 h-2.5" />
+                      <span>Download</span>
+                    </div>
+                  </a>
+                </div>
+
+                {/* Build status / trigger link */}
+                <div className="mt-3 px-3 py-2 rounded-md bg-violet-400/5 border border-violet-400/30 text-[10px] text-muted-foreground flex items-start gap-2">
+                  <Sparkles className="w-3 h-3 text-violet-400 flex-shrink-0 mt-0.5" aria-hidden="true" />
+                  <div className="flex-1">
+                    <div className="text-violet-300 font-mono font-bold mb-0.5">AUTO-BUILD SYSTEM</div>
+                    <p className="leading-relaxed">
+                      Downloads the latest official build from GitHub Releases.
+                      If no build is available yet, you can trigger one manually via
+                      the <a href={GITHUB_ACTIONS_URL} target="_blank" rel="noopener noreferrer" className="text-violet-400 underline hover:text-violet-300">GitHub Actions workflow</a>.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Coming soon note */}
+                <div className="mt-2 text-[9px] text-muted-foreground/70 text-center italic">
+                  Windows & Android apps use the same AI as this website
+                </div>
+              </section>
+
               {/* === ABOUT === */}
               <section>
                 <h3 className="text-[10px] font-mono font-bold tracking-widest text-primary mb-3 flex items-center gap-1.5">
@@ -230,9 +321,12 @@ export function SettingsDrawer({
                   ABOUT ARCHER
                 </h3>
                 <div className="px-3 py-2.5 rounded-md bg-primary/5 border border-primary/20 text-[11px] text-foreground/80 leading-relaxed">
-                  Archer AI v3.0 — a personal AI friend crafted by Tony sir.
-                  Voice-controlled, multilingual (Bangla/English/Hindi), with a
-                  cyberpunk HUD inspired by Iron Man&apos;s JARVIS.
+                  Archer AI v4.0 Aurora — a personal AI friend crafted by Tony sir.
+                  Voice-controlled, multilingual (Bangla/English/Hindi), with the
+                  Aurora Holographic theme inspired by Iron Man&apos;s JARVIS.
+                  <br /><br />
+                  Available on Web, Windows, and Android — same AI, same commands,
+                  same voice — everywhere.
                 </div>
               </section>
             </div>

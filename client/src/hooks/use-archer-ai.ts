@@ -726,8 +726,11 @@ export function useArcherAI() {
       const stored = localStorage.getItem("archer-voice-type");
       if (stored === "friday" || stored === "jarvis") saved = stored;
     } catch {}
-    setVoiceType(saved);
-    voiceTypeRef.current = saved;
+    const t = setTimeout(() => {
+      setVoiceType(saved);
+      voiceTypeRef.current = saved;
+    }, 0);
+    return () => clearTimeout(t);
   }, []);
 
   useEffect(() => {
@@ -1181,9 +1184,9 @@ export function useArcherAI() {
     [isMuted, speak]
   );
 
-  // Keep handleUserInputRef in sync
+  // Keep handleUserInputRef in sync (handleUserInput is recreated when isMuted or speak change)
   useEffect(() => {
-    handleUserInputRef.current = handleUserInput;
+    const t = setTimeout(() => { handleUserInputRef.current = handleUserInput; }, 0); return () => clearTimeout(t);
   }, [handleUserInput]);
 
   const sendMessage = useCallback(

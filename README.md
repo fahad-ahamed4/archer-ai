@@ -1,15 +1,15 @@
 # 🤖 ARCHER AI — Mobile Jarvis Assistant
 
 > A next-generation voice-controlled AI assistant inspired by Iron Man's JARVIS.
-> Built with **Next.js 16**, **TypeScript**, **Tailwind CSS 4**, **shadcn/ui**,
-> and powered by the **Z.ai LLM SDK**.
+> Available on **Web**, **Windows (.exe)**, and **Android (.apk)** — same AI everywhere.
+> Built with **Next.js 16**, **TypeScript**, **Tailwind CSS 4**, **Electron**, and **Capacitor**.
 
-![Archer AI](https://img.shields.io/badge/Archer_AI-v4.0_Aurora-00e5ff?style=for-the-badge&logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NSIgZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSIjMDBlNWZmIiBzdHJva2Utd2lkdGg9IjMiLz48dGV4dCB4PSI1MCIgeT0iNjIiIGZvbnQtc2l6ZT0iMzgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMwMGU1ZmYiIGZvbnQtZmFtaWx5PSJtb25vc3BhY2UiPkE8L3RleHQ+PC9zdmc+)
-
-![Next.js 16](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
+![Archer AI](https://img.shields.io/badge/Archer_AI-v4.0_Aurora-00e5ff?style=for-the-badge)
+![Platforms](https://img.shields.io/badge/Platforms-Web%20%7C%20Windows%20%7C%20Android-8b5cf6?style=for-the-badge)
+![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38bdf8?style=flat-square&logo=tailwindcss)
-![shadcn/ui](https://img.shields.io/badge/shadcn%2Fui-New_York-000000?style=flat-square)
+![Electron](https://img.shields.io/badge/Electron-33-47848F?style=flat-square&logo=electron)
+![Capacitor](https://img.shields.io/badge/Capacitor-6-119EFF?style=flat-square&logo=capacitor)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
 ---
@@ -18,16 +18,16 @@
 
 1. [Overview](#-overview)
 2. [Features](#-features)
-3. [Tech Stack](#-tech-stack)
+3. [Project Structure](#-project-structure)
 4. [Prerequisites](#-prerequisites)
 5. [Installation](#-installation)
-6. [Configuration](#-configuration)
-7. [Running the App](#-running-the-app)
-8. [Project Structure](#-project-structure)
-9. [Voice Commands Reference](#-voice-commands-reference)
-10. [Browser Support](#-browser-support)
-11. [Troubleshooting](#-troubleshooting)
-12. [Contributing](#-contributing)
+6. [Running the App](#-running-the-app)
+7. [Building Apps](#-building-apps)
+8. [Auto-Build via GitHub Actions](#-auto-build-via-github-actions)
+9. [Configuration](#-configuration)
+10. [Voice Commands Reference](#-voice-commands-reference)
+11. [Browser Support](#-browser-support)
+12. [Troubleshooting](#-troubleshooting)
 13. [License](#-license)
 
 ---
@@ -36,23 +36,29 @@
 
 **Archer AI** is a personal AI friend — not just an assistant, but a companion. Built in the spirit of Tony Stark's JARVIS, it lives in a beautiful aurora-themed web app and responds to your voice in **Banglish** (Bangla in Roman script) — the natural way many Bangladeshis communicate online.
 
-The app speaks with two distinct personalities:
-- 🤵 **JARVIS** — Deep, calm, male voice (default)
-- 💃 **FRIDAY** — Light, clear, female voice
+### 🌍 Available on 3 Platforms
+
+| Platform | Format | How to Get |
+|----------|--------|-----------|
+| 🌐 **Web** | Next.js app | Run locally or deploy to Vercel |
+| 💻 **Windows** | `.exe` installer | Download from [Releases](https://github.com/fahad-ahamed4/archer-ai/releases) or build locally |
+| 📱 **Android** | `.apk` file | Download from [Releases](https://github.com/fahad-ahamed4/archer-ai/releases) or build locally |
+
+All three platforms use the **same AI brain** — same commands, same voice, same Banglish responses.
 
 ### What Archer Can Do
 
 - 🎙️ **Voice Recognition** — Continuous listening with auto-restart (Chrome/Edge)
-- 🔊 **Natural Text-to-Speech** — Uses Google/Microsoft natural voices
-- 🧠 **General Knowledge** — Ask about science, history, geography, famous people
+- 🔊 **Natural Text-to-Speech** — Google/Microsoft natural voices
+- 🧠 **LLM-Powered Knowledge** — Science, history, geography, famous people
 - 📱 **30+ App Commands** — Open Instagram, WhatsApp, Spotify, Netflix, Gmail, GitHub, etc.
 - 🧮 **Math Calculations** — "what is 10 times 5" → instant answer
 - ⏰ **Time/Date/Day** — Always knows the current time
-- 🌤️ **Weather** — Pulls current weather
 - 😄 **Entertainment** — Jokes, quotes, facts, proverbs, stories, shayari
 - 📝 **Notes & Reminders** — Save quick notes via voice
-- 🎮 **Games** — Chess, Ludo, Tetris, Snake, GTA, PUBG, Free Fire, etc.
-- 🌍 **Multilingual** — Bangla + English + Hindi (Banglish primary)
+- 🎮 **15+ Games** — Chess, Ludo, Snake, Tetris, GTA, PUBG, etc.
+- 🎭 **2 Voice Personalities** — JARVIS (male) + FRIDAY (female)
+- 🌍 **Multilingual** — Banglish primary, English + Hindi mixed
 
 ---
 
@@ -61,91 +67,122 @@ The app speaks with two distinct personalities:
 ### 🎨 Visual Design — "Aurora Holographic" Theme
 - Animated aurora gradient background (deep navy + violet/cyan/pink/gold)
 - Glassmorphic cards with backdrop-blur
-- Starfield drift particles
 - **Cute SVG robot mascot** with 5 mood states (idle/listening/speaking/thinking/happy)
 - Animated halo rings around mascot
-- Smooth Framer Motion entrance animations
-- Custom particle canvas (optional, in `particle-orb.tsx`)
+- Smooth Framer Motion animations
 
 ### 🎙️ Voice Pipeline
-- **Speech-to-Text**: Web Speech API (`bn-IN` recognition)
-- **Text-to-Speech**: Web Speech Synthesis with:
-  - Google UK English Male/Female (preferred)
-  - Microsoft natural voices (fallback)
+- **STT**: Web Speech API (`bn-IN` recognition, continuous + auto-restart)
+- **TTS**: Web Speech Synthesis with:
+  - Google UK English Male/Female (preferred natural voices)
   - Chrome bug workaround (10s keep-alive)
   - Hard timeout fallback (no silent failures)
-  - Race condition fix (80ms delay after cancel)
+  - Race condition fix
 
 ### ⚡ Lightning Speed
 - 0ms artificial delay for command responses
-- 200ms reconnect timer (was 300ms)
+- 200ms reconnect timer
 - Instant TTS start
 - Concurrent message display + speak
-
-### 🎭 2 Voice Personalities
-- **JARVIS**: pitch 0.95, rate 0.95 (deep but clear)
-- **FRIDAY**: pitch 1.1, rate 1.0 (light and clear)
-- Persisted in `localStorage`
 
 ### ♿ Accessibility
 - `role="dialog"` + `aria-modal` for drawers
 - Focus trap (Tab/Shift+Tab within drawers)
 - Escape key closes drawers
 - `prefers-reduced-motion` respected
-- `aria-label` on all controls
 - Mobile zoom enabled (WCAG 1.4.4)
-- `aria-live` for dynamic messages
 
 ### 🔒 Security
 - Input length validation (1000 char max)
 - History sanitization (prompt injection protection)
 - LLM call timeout (15s AbortController)
-- Body size limit
 
 ---
 
-## 🛠️ Tech Stack
+## 📁 Project Structure
 
-| Category | Technology |
-|----------|-----------|
-| **Framework** | Next.js 16 (App Router) |
-| **Language** | TypeScript 5 |
-| **Styling** | Tailwind CSS 4 + shadcn/ui (New York) |
-| **UI Components** | Lucide icons, Framer Motion |
-| **Database** | Prisma ORM (SQLite) |
-| **AI Backend** | z-ai-web-dev-sdk |
-| **Voice Input** | Web Speech API (SpeechRecognition) |
-| **Voice Output** | Web Speech API (SpeechSynthesis) |
-| **State Management** | React hooks + refs |
-| **Linting** | ESLint 9 |
-| **Package Manager** | Bun (recommended) or npm/yarn |
+```
+archer-ai/
+├── client/                      # 🌐 Next.js web app (frontend + API routes)
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── api/
+│   │   │   │   └── archer-chat/
+│   │   │   │       └── route.ts        # LLM endpoint (Banglish)
+│   │   │   ├── globals.css             # Aurora Holographic theme
+│   │   │   ├── layout.tsx
+│   │   │   └── page.tsx
+│   │   ├── components/
+│   │   │   ├── archer-ai/
+│   │   │   │   ├── archer-dashboard.tsx     # Main dashboard
+│   │   │   │   ├── chat-history.tsx         # Chat drawer
+│   │   │   │   ├── jarvis-mascot.tsx       # Cute robot mascot
+│   │   │   │   ├── particle-orb.tsx        # Canvas particle orb
+│   │   │   │   └── settings-drawer.tsx     # Settings + Download buttons
+│   │   │   └── ui/                       # shadcn/ui components
+│   │   ├── hooks/
+│   │   │   └── use-archer-ai.ts          # Voice + chat state machine
+│   │   └── lib/
+│   │       ├── browser-support.ts        # Browser/OS detection
+│   │       ├── db.ts
+│   │       └── utils.ts
+│   ├── prisma/
+│   │   └── schema.prisma
+│   ├── public/
+│   ├── package.json
+│   ├── next.config.ts
+│   ├── tailwind.config.ts
+│   ├── tsconfig.json
+│   └── eslint.config.mjs
+│
+├── server/                      # 🖥️ Optional standalone backend (Express)
+│   ├── index.js                 # Express server with /api/archer-chat
+│   ├── package.json
+│   └── README.md
+│
+├── electron/                    # 💻 Windows .exe (Electron)
+│   ├── main.cjs                 # Electron main process
+│   ├── preload.cjs              # Secure contextBridge
+│   ├── package.json             # electron-builder config
+│   ├── assets/                  # App icon, etc.
+│   └── README.md
+│
+├── android/                     # 📱 Android .apk (Capacitor)
+│   ├── capacitor.config.ts      # Capacitor config
+│   ├── package.json
+│   └── README.md
+│
+├── .github/workflows/
+│   └── build-release.yml        # 🚀 Auto-build for Windows + Android
+│
+├── package.json                 # Root package.json (workspaces)
+├── README.md                    # This file
+├── .gitignore
+├── .env.example
+├── Caddyfile                    # Gateway config (for production)
+└── LICENSE
+```
 
 ---
 
 ## ✅ Prerequisites
 
-Before installing, make sure you have:
-
+### For Web Development
 1. **Node.js** ≥ 18.17 (Node 20+ recommended)
-   ```bash
-   node --version
-   ```
+2. **Bun** (recommended) — `curl -fsSL https://bun.sh/install | bash`
+3. **Modern browser** — Chrome or Edge for voice features
 
-2. **Bun** (recommended) or npm/yarn/pnpm
-   ```bash
-   # Install Bun (fastest)
-   curl -fsSL https://bun.sh/install | bash
-   
-   # Or use npm
-   npm install -g npm@latest
-   ```
+### For Windows (.exe) Build
+1. All of the above
+2. **Electron** dependencies (installed automatically via `bun install` in `electron/`)
+3. For cross-platform builds on Linux/Mac, install **Wine** (for Windows target on non-Windows)
 
-3. **A modern browser** for voice features:
-   - **Google Chrome** (recommended) — full voice support
-   - **Microsoft Edge** — full voice support
-   - Firefox, Safari, iOS — text chat works, voice limited
-
-4. **Z.ai SDK API access** — The app uses `z-ai-web-dev-sdk` which needs to be configured.
+### For Android (.apk) Build
+1. All web prerequisites
+2. **Java JDK 17** (Android Studio ships with one)
+3. **Android Studio** (latest version)
+4. **Android SDK** (Platform 34, Build Tools 34.0.0)
+5. **Gradle** (the wrapper from `cap add android` handles this)
 
 ---
 
@@ -154,54 +191,46 @@ Before installing, make sure you have:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/archer-ai.git
+git clone https://github.com/fahad-ahamed4/archer-ai.git
 cd archer-ai
 ```
 
-### Step 2: Install Dependencies
+### Step 2: Install All Dependencies (Workspaces)
 
-**With Bun (recommended — fastest):**
+The project uses **Bun workspaces** — installing at the root installs everything:
+
 ```bash
 bun install
 ```
 
-**With npm:**
-```bash
-npm install
-```
-
-**With pnpm:**
-```bash
-pnpm install
-```
+This installs dependencies for:
+- `client/` — Next.js app
+- `server/` — Optional Express backend
+- `electron/` — Electron desktop app
+- `android/` — Capacitor Android wrapper
 
 ### Step 3: Set Up Environment Variables
 
-Create a `.env` file in the project root:
-
 ```bash
-# .env
+cp .env.example .env
+```
+
+Edit `.env` if needed:
+```env
 DATABASE_URL="file:./db/custom.db"
 ```
 
-> 💡 **Note**: The Z.ai SDK reads its credentials from environment configuration.
-> Make sure your environment has the SDK credentials available (typically via
-> `ZAI_API_KEY` or a `.z-ai-config` file — see Z.ai SDK docs for details).
-
-### Step 4: Initialize the Database (Optional — only if using Prisma features)
+### Step 4: Initialize Database (Optional)
 
 ```bash
-bun run db:push
-# or
-npx prisma db push --accept-data-loss
+cd client && bun run db:push
+cd ..
 ```
 
-### Step 5: Start the Development Server
+### Step 5: Run the Web App
 
 ```bash
 bun run dev
-# or
-npm run dev
 ```
 
 The app will start on **http://localhost:3000**
@@ -215,235 +244,250 @@ When you first click the mic button:
 
 ---
 
+## 🚀 Running the App
+
+### Web (Development)
+
+```bash
+bun run dev              # From root — runs Next.js dev server
+# or
+cd client && bun run dev
+```
+
+Visit **http://localhost:3000**
+
+### Web (Production Build)
+
+```bash
+bun run build:web        # From root
+cd client && bun start
+```
+
+### Windows Desktop App (Development)
+
+In one terminal:
+```bash
+bun run dev:web         # Start Next.js dev server
+```
+
+In another terminal:
+```bash
+bun run dev:electron    # Launch Electron pointing to localhost:3000
+```
+
+### Windows Desktop App (Production Build)
+
+```bash
+# Set APP_URL to your deployed URL
+export APP_URL=https://your-archer-app.vercel.app
+
+# Build the .exe installer
+bun run build:windows
+```
+
+The installer will be at `electron/dist/archer-ai-4.0.0-setup.exe`.
+
+### Android App (Development)
+
+```bash
+# Make sure web app is running (or use deployed URL)
+bun run dev:web
+
+# Sync web assets
+cd android && bun run sync
+
+# Open in Android Studio for testing
+bun run open
+```
+
+### Android App (Production Build)
+
+```bash
+# Set APP_URL to your deployed URL
+export APP_URL=https://your-archer-app.vercel.app
+
+# Build the APK
+cd android && bun run build:apk
+```
+
+The APK will be at `android/archer-ai.apk`.
+
+---
+
+## 🏗️ Building Apps
+
+### Build Everything
+
+```bash
+# Build web + Windows + Android
+bun run build
+```
+
+### Individual Builds
+
+| Command | What it does |
+|---------|--------------|
+| `bun run build:web` | Builds Next.js for web |
+| `bun run build:windows` | Builds Windows .exe installer |
+| `bun run build:apk` | Builds Android .apk |
+| `bun run build:electron` | Builds Electron for current OS |
+| `bun run build:android` | Builds Android via Capacitor |
+
+### Clean Build Artifacts
+
+```bash
+bun run clean
+```
+
+---
+
+## 🤖 Auto-Build via GitHub Actions
+
+The project includes a GitHub Actions workflow at `.github/workflows/build-release.yml` that automatically builds Archer AI for Windows and Android.
+
+### Triggers
+
+The workflow runs on:
+1. **Tag push** — Push a tag like `v4.0.0` to trigger a release build
+2. **Manual dispatch** — Go to Actions → "Build & Release" → "Run workflow"
+
+### How to Trigger a Build
+
+#### Option 1: Tag-based release (recommended)
+
+```bash
+# Bump version in package.json files first
+# Then create and push a tag:
+git tag v4.0.0
+git push origin v4.0.0
+```
+
+This triggers the workflow, builds everything, and creates a GitHub Release with download links.
+
+#### Option 2: Manual dispatch
+
+1. Go to https://github.com/fahad-ahamed4/archer-ai/actions/workflows/build-release.yml
+2. Click **"Run workflow"**
+3. Enter a version number (e.g., `4.0.0`)
+4. Click **"Run workflow"**
+
+### Workflow Steps
+
+1. **Build Web** — Compiles the Next.js app
+2. **Build Windows** — Uses `electron-builder` to create the `.exe` installer on `windows-latest`
+3. **Build Android** — Uses Capacitor + Gradle to build the `.apk` on `ubuntu-latest`
+4. **Upload to Releases** — Both `.exe` and `.apk` are uploaded to GitHub Releases
+
+### Configuration Needed
+
+Before the workflow runs, you need to update these files with your deployed URL:
+
+1. `electron/main.cjs` — Replace `APP_URL` value
+2. `android/capacitor.config.ts` — Replace `server.url`
+
+Both should point to your deployed Archer AI web URL (e.g., on Vercel).
+
+### Download from Releases
+
+Once the workflow completes, downloads are available at:
+- **Releases page**: https://github.com/fahad-ahamed4/archer-ai/releases
+- **Workflow artifacts**: https://github.com/fahad-ahamed4/archer-ai/actions
+
+The Settings drawer in the app also has download buttons that link directly to the latest release.
+
+---
+
 ## ⚙️ Configuration
 
-### Voice Type Settings
+### Setting the Deployed URL
 
-Open the **Settings** drawer (gear icon top-right) to:
-- Switch between **JARVIS** (male) and **FRIDAY** (female) voices
-- Mute/unmute voice output
-- View browser support status
+For Electron and Android apps to work, they need to know where your Archer AI web app is deployed.
 
-### Browser Support Detection
+#### For Electron (`electron/main.cjs`):
+```javascript
+const APP_URL = process.env.APP_URL || 'https://your-deployed-app.vercel.app';
+```
 
-The app auto-detects your browser and OS, showing a helpful banner if voice features are limited.
-
-### Customizing the LLM Persona
-
-Edit `src/app/api/archer-chat/route.ts` and modify the `ARCHER_SYSTEM_PROMPT` constant to change Archer's personality, language style, or behavior.
-
-### Customizing Commands
-
-All hardcoded commands live in `src/hooks/use-archer-ai.ts`:
-- `tryHandleCommand()` — Basic commands (greetings, songs, who-are-you)
-- `tryHandleExtendedCommand()` — 30+ extended commands (apps, math, jokes, etc.)
-
-To add a new command:
+#### For Android (`android/capacitor.config.ts`):
 ```typescript
-if (/your-regex-here/i.test(lower)) {
-  return {
-    response: "Bilkul, eto kore dicchi.",
-    action: "open_url",  // optional: "open_url" | "play_song" | "open_app" | "add_task"
-    url: "https://example.com",  // required if action is open_url/play_song/open_app
-  };
+server: {
+  url: process.env.APP_URL || 'https://your-deployed-app.vercel.app',
+  cleartext: true,
 }
 ```
 
----
+#### For GitHub Actions workflow:
+The workflow sets `APP_URL=https://archer-ai.vercel.app` by default. Update this in `.github/workflows/build-release.yml` if your URL differs.
 
-## 🚀 Running the App
+### Voice Settings
 
-### Development Mode
+Open the **Settings** drawer (gear icon in app) to:
+- Switch between **JARVIS** (male) and **FRIDAY** (female) voices
+- Mute/unmute voice output
+- View browser support status
+- **Download apps** — Windows .exe and Android .apk buttons
 
-```bash
-bun run dev
-```
+### Customizing the LLM Persona
 
-### Production Build
+Edit `client/src/app/api/archer-chat/route.ts` and modify `ARCHER_SYSTEM_PROMPT`.
 
-```bash
-bun run build
-bun run start
-```
+### Customizing Commands
 
-### Lint Check
-
-```bash
-bun run lint
-```
-
-### Database Operations
-
-```bash
-bun run db:push      # Push schema changes
-bun run db:generate  # Regenerate Prisma client
-bun run db:migrate   # Create migration
-bun run db:reset     # Reset database
-```
-
----
-
-## 📁 Project Structure
-
-```
-archer-ai/
-├── src/
-│   ├── app/
-│   │   ├── api/
-│   │   │   └── archer-chat/
-│   │   │       └── route.ts          # LLM API endpoint (Banglish persona)
-│   │   ├── globals.css               # Aurora Holographic theme
-│   │   ├── layout.tsx                # Root layout + metadata
-│   │   └── page.tsx                  # Home page (dashboard mount)
-│   ├── components/
-│   │   ├── archer-ai/
-│   │   │   ├── archer-dashboard.tsx # Main dashboard UI (Aurora theme)
-│   │   │   ├── chat-history.tsx     # Slide-in chat drawer
-│   │   │   ├── jarvis-mascot.tsx    # Cute SVG robot mascot (5 moods)
-│   │   │   ├── particle-orb.tsx     # Canvas particle orb (legacy)
-│   │   │   └── settings-drawer.tsx  # Voice switch + browser info
-│   │   └── ui/                       # shadcn/ui components
-│   ├── hooks/
-│   │   ├── use-archer-ai.ts          # Voice + chat state machine (main logic)
-│   │   ├── use-mobile.ts             # Mobile detection
-│   │   └── use-toast.ts              # Toast notifications
-│   └── lib/
-│       ├── browser-support.ts        # Browser/OS detection
-│       ├── db.ts                     # Prisma client
-│       └── utils.ts                  # Tailwind cn() helper
-├── prisma/
-│   └── schema.prisma                 # Database schema
-├── public/                           # Static assets
-├── .env                              # Environment variables (NOT committed)
-├── .env.example                      # Example env file
-├── .gitignore
-├── README.md                         # This file
-├── package.json
-├── tsconfig.json
-├── next.config.ts
-├── tailwind.config.ts
-├── eslint.config.mjs
-└── components.json                    # shadcn/ui config
-```
+Edit `client/src/hooks/use-archer-ai.ts`:
+- `tryHandleCommand()` — Basic commands
+- `tryHandleExtendedCommand()` — 30+ extended commands
 
 ---
 
 ## 🎤 Voice Commands Reference
 
-### 📱 App Opening Commands
-
-| Say this | Archer responds |
-|----------|----------------|
-| "open facebook" | "Okay, Facebook app khol dicchi." |
-| "open instagram" | "Thik ache, Instagram khul dicchi." |
-| "open whatsapp" | "Thik ache, WhatsApp khul dicchi." |
-| "open twitter" | "Okay, Twitter/X khul dicchi." |
-| "open telegram" | "Okay, Telegram khul dicchi." |
-| "open snapchat" | "Thik ache, Snapchat khul dicchi." |
-| "open linkedin" | "Okay, LinkedIn khul dicchi." |
-| "open reddit" | "Thik ache, Reddit khul dicchi." |
-| "open pinterest" | "Okay, Pinterest khul dicchi." |
-
-### 🎵 Music & Video
-
-| Command | Response |
-|---------|----------|
-| "open spotify" | "Bilkul, Spotify khul dicchi." |
-| "open apple music" | "Thik ache, Apple Music khul dicchi." |
-| "open youtube music" | "Okay, YouTube Music khul dicchi." |
-| "open soundcloud" | "Bilkul, SoundCloud khul dicchi." |
-| "open netflix" | "Thik ache, Netflix khul dicchi." |
-| "open amazon prime" | "Okay, Amazon Prime Video khul dicchi." |
-| "open disney" | "Bilkul, Disney+ Hotstar khul dicchi." |
-
-### 🛒 Shopping
-
-| Command | Response |
-|---------|----------|
-| "open amazon" | "Thik ache, Amazon khul dicchi." |
-| "open flipkart" | "Okay, Flipkart khul dicchi." |
-| "open daraz" | "Bilkul, Daraz khul dicchi." |
-| "open ebay" | "Thik ache, eBay khul dicchi." |
-| "open chaldal" | "Okay, Chaldal khul dicchi." |
-
-### 📧 Email & Dev Tools
-
-| Command | Response |
-|---------|----------|
-| "open gmail" | "Bilkul, Gmail khul dicchi." |
-| "open outlook" | "Thik ache, Outlook khul dicchi." |
-| "open maps" | "Okay, Google Maps khul dicchi." |
-| "open github" | "Bilkul, GitHub khul dicchi." |
-| "open stack overflow" | "Thik ache, Stack Overflow khul dicchi." |
-| "open chatgpt" | "Okay, ChatGPT khul dicchi." |
-| "open gemini" | "Bilkul, Google Gemini khul dicchi." |
-| "open wikipedia" | "Thik ache, Wikipedia khul dicchi." |
-| "open translate" | "Okay, Google Translate khul dicchi." |
+### 📱 App Opening (25+ commands)
+- "open facebook" / "open instagram" / "open whatsapp" / "open twitter"
+- "open telegram" / "open snapchat" / "open linkedin" / "open reddit"
+- "open pinterest" / "open spotify" / "open netflix" / "open amazon"
+- "open flipkart" / "open daraz" / "open gmail" / "open outlook"
+- "open maps" / "open github" / "open stack overflow"
+- "open chatgpt" / "open gemini" / "open wikipedia" / "open translate"
 
 ### ⏰ Time, Date, Day
-
-| Command | Response |
-|---------|----------|
-| "what is the time" | "Sir, ekhon somoy hocche 5:14 PM." |
-| "what is the date" | "Sir, ajker tarikh Monday, September 30, 2024." |
-| "what is the day" | "Sir, aj Monday bar." |
+- "what is the time" → "Sir, ekhon somoy hocche 5:14 PM."
+- "what is the date" → Full date with weekday
+- "what is the day" → Day of week
 
 ### 🌤️ Weather
-
-| Command | Response |
-|---------|----------|
-| "what is the weather today" | Opens Google Weather |
+- "what is the weather today"
 
 ### 🧮 Math
-
-| Command | Response |
-|---------|----------|
-| "what is 5 plus 3" | "Sir, 5 jog 3 hocche 8." |
-| "what is 10 times 5" | "Sir, 10 gun 5 hocche 50." |
-| "what is 100 minus 25" | "Sir, 100 biyog 25 hocche 75." |
-| "what is 20 divided by 4" | "Sir, 20 vag 4 hocche 5." |
+- "what is 5 plus 3" → "Sir, 5 jog 3 hocche 8."
+- "what is 10 times 5" → "Sir, 10 gun 5 hocche 50."
+- "what is 100 minus 25" → "Sir, 100 biyog 25 hocche 75."
+- "what is 20 divided by 4" → "Sir, 20 vag 4 hocche 5."
 
 ### 😄 Entertainment
-
-| Command | Response |
-|---------|----------|
-| "tell me a joke" | Random Bangla joke |
-| "tell me a quote" | Famous person's quote |
-| "tell me a fact" | Interesting fact |
-| "tell me a proverb" | Bengali proverb |
-| "tell me a story" | Short story |
-| "tell me a shayari" | Shayari/poem |
+- "tell me a joke" → Random Bangla joke
+- "tell me a quote" → Famous person's quote
+- "tell me a fact" → Interesting fact
+- "tell me a proverb" → Bengali proverb
+- "tell me a story" → Short story
+- "tell me a shayari" → Shayari/poem
 
 ### 🎮 Games
-
-| Command | Response |
-|---------|----------|
-| "play chess game" | "Bilkul, chess game khul dicchi!" |
-| "play ludo" | "Bilkul, ludo game khul dicchi!" |
-| "play motu patlu" | "Bilkul, Motu Patlu game choley dicchi!" |
-| "play snake" / "tetris" / "sudoku" / "2048" / etc. | Game opens |
+- "play chess game" / "play ludo" / "play snake" / "play tetris"
+- "play sudoku" / "play 2048" / "play motu patlu"
+- "play gta" / "play pubg" / "play free fire"
 
 ### 📝 Notes & Reminders
-
-| Command | Response |
-|---------|----------|
-| "note: buy milk tomorrow" | "Sir, ekta note add kore dicchi: 'buy milk tomorrow'." |
-| "reminder: call mother" | "Okay sir, 'call mother' er jonno reminder set kore dicchi." |
+- "note: buy milk tomorrow"
+- "reminder: call mother"
 
 ### 🎵 Songs
+- "play sunflower song" → Opens YouTube
+- "একটা গান বাজাও" → Bangla command
 
-| Command | Response |
-|---------|----------|
-| "play sunflower song" | "Bilkul, sunflower gaan bajey dicchi." |
-| "একটা গান বাজাও" (Bangla) | "Bilkul, ekta gaan chala diya." |
-
-### 🌍 General Knowledge (LLM-powered)
-
-Ask anything! Examples:
+### 🌍 General Knowledge (LLM)
+Ask anything!
 - "who is rabindranath tagore"
 - "what is photosynthesis"
-- "tell me about bangladesh history"
-- "who is albert einstein"
 - "explain gravity"
 - "what is artificial intelligence"
 
@@ -451,71 +495,60 @@ Ask anything! Examples:
 
 ## 🌐 Browser Support
 
-| Browser | Voice Input | Voice Output | Text Chat | Notes |
-|---------|-------------|---------------|-----------|-------|
-| **Chrome (Desktop)** | ✅ Full | ✅ Full | ✅ | Best experience |
-| **Edge (Desktop)** | ✅ Full | ✅ Full | ✅ | Full support |
-| **Chrome (Android)** | ✅ Full | ✅ Full | ✅ | Mobile-optimized |
-| **Firefox** | ❌ Limited | ✅ Full | ✅ | Text chat works |
-| **Safari (Desktop)** | ❌ Limited | ✅ Full | ✅ | No voice input |
-| **Safari (iOS)** | ❌ No | ✅ Full | ✅ | Install Chrome on iOS |
-| **Any browser** | — | — | ✅ | Text chat always works |
+| Browser | Voice Input | Voice Output | Text Chat |
+|---------|-------------|---------------|-----------|
+| **Chrome (Desktop)** | ✅ Full | ✅ Full | ✅ |
+| **Edge (Desktop)** | ✅ Full | ✅ Full | ✅ |
+| **Chrome (Android)** | ✅ Full | ✅ Full | ✅ |
+| **Firefox** | ❌ Limited | ✅ Full | ✅ |
+| **Safari (Desktop)** | ❌ Limited | ✅ Full | ✅ |
+| **Safari (iOS)** | ❌ No | ✅ Full | ✅ |
 
-The app shows a banner explaining limitations on unsupported browsers.
+The app auto-detects browser support and shows a helpful banner.
 
 ---
 
 ## 🔧 Troubleshooting
 
 ### Voice Input Not Working
-
-1. **Check browser**: Use Chrome or Edge (best support)
-2. **Allow microphone**: Click 🔒 icon in address bar → Site settings → Microphone → Allow
-3. **HTTPS required**: Voice APIs only work on HTTPS or `http://localhost`
-4. **No mic detected**: Connect a microphone to your device
-5. **Try refresh**: Sometimes the Web Speech API needs a page reload
+1. Use Chrome or Edge (best support)
+2. Allow microphone: Click 🔒 icon → Site settings → Microphone → Allow
+3. HTTPS required (or `http://localhost`)
+4. Check microphone is connected
 
 ### TTS (Voice Output) Silent
-
-1. **Check Settings drawer**: Ensure voice is not muted
-2. **Switch voice**: Try JARVIS → FRIDAY → back to JARVIS
-3. **Chrome bug**: The app has a 10-second keep-alive workaround, but if TTS still fails:
-   - Refresh the page
-   - Check system volume
-   - Try a different voice in Settings
-
-### LLM Not Responding
-
-1. Check internet connection
-2. The LLM endpoint has a 15-second timeout — long questions may fail
-3. Check browser console for errors
+1. Check Settings → Audio Output is not muted
+2. Try switching voice (JARVIS → FRIDAY → back)
+3. Refresh the page (Chrome TTS bug workaround)
 
 ### Build Errors
 
 ```bash
 # Clear Next.js cache
-rm -rf .next
+rm -rf client/.next
 bun run dev
 
 # Reinstall dependencies
-rm -rf node_modules
+rm -rf node_modules client/node_modules
 bun install
 ```
 
-### TypeScript Errors
+### Electron Build Fails
 
 ```bash
-bun run lint
+cd electron && rm -rf node_modules dist
+bun install
+bun run build:win
 ```
 
-### Database Issues
+### Android Build Fails
 
 ```bash
-# Reset database
-bun run db:reset
-
-# Push fresh schema
-bun run db:push
+cd android && rm -rf node_modules android
+bun install
+npx cap add android
+bun run sync
+bun run build:apk
 ```
 
 ---
@@ -529,12 +562,10 @@ bun run db:push
 5. Open a Pull Request
 
 ### Code Style
-
 - TypeScript strict mode
 - ESLint + Prettier
 - Functional components with hooks
-- Tailwind CSS for styling (no inline styles unless dynamic)
-- shadcn/ui for component primitives
+- Tailwind CSS for styling
 - All responses in Banglish (Bangla in Roman script)
 
 ---
@@ -546,7 +577,7 @@ MIT License — feel free to use, modify, and distribute.
 ```
 MIT License
 
-Copyright (c) 2024 Archer AI
+Copyright (c) 2024 Archer AI Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -573,17 +604,20 @@ SOFTWARE.
 
 - **Iron Man / JARVIS** — Inspiration from the Marvel Cinematic Universe
 - **Tony Stark** — For showing us what a personal AI friend could be
-- **OpenAI, Google, Anthropic** — For pushing AI accessibility forward
 - **Bangladesh developer community** — For inspiring Banglish-first AI
 - **shadcn/ui** — For the beautiful component library
+- **Electron** — For cross-platform desktop apps
+- **Capacitor** — For native mobile app wrapping
 - **Z.ai** — For the LLM SDK that powers Archer's brain
 
 ---
 
 ## 📞 Contact
 
+- **Repository**: https://github.com/fahad-ahamed4/archer-ai
+- **Issues**: https://github.com/fahad-ahamed4/archer-ai/issues
+- **Releases**: https://github.com/fahad-ahamed4/archer-ai/releases
 - **Author**: Archer AI Team
-- **Created by**: Tony Sir
 - **Version**: v4.0 "Aurora"
 - **Last Updated**: September 2024
 

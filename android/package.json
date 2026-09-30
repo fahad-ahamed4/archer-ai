@@ -1,0 +1,26 @@
+{
+  "name": "archer-ai-android",
+  "version": "4.0.0",
+  "description": "Archer AI Android app (Capacitor wrapper)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "echo 'Use: cd ../client && bun run dev, then visit localhost:3000'",
+    "sync": "cap sync android",
+    "copy": "cap copy android",
+    "open": "cap open android",
+    "build:apk": "cd android && ./gradlew assembleDebug && cp app/build/outputs/apk/debug/app-debug.apk ../archer-ai.apk",
+    "build": "bun run sync && bun run build:apk",
+    "build:release": "cd android && ./gradlew assembleRelease && cp app/build/outputs/apk/release/app-release-unsigned.apk ../archer-ai-release.apk",
+    "clean": "rm -rf android/ archer-ai.apk archer-ai-release.apk"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.0.0",
+    "@capacitor/core": "^6.0.0",
+    "@capacitor/app": "^6.0.0",
+    "@capacitor/status-bar": "^6.0.0",
+    "@capacitor/splash-screen": "^6.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.0.0"
+  }
+}

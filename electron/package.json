@@ -1,0 +1,76 @@
+{
+  "name": "archer-ai-electron",
+  "version": "4.0.0",
+  "description": "Archer AI desktop app (Windows .exe, macOS, Linux)",
+  "main": "main.cjs",
+  "author": "Archer AI Team",
+  "license": "MIT",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development electron .",
+    "dev:web": "cd ../client && bun run dev",
+    "build": "electron-builder --win --x64",
+    "build:win": "electron-builder --win --x64",
+    "build:mac": "electron-builder --mac --arm64",
+    "build:linux": "electron-builder --linux --x64",
+    "build:all": "electron-builder --win --mac --linux --x64",
+    "preview": "electron .",
+    "clean": "rm -rf dist"
+  },
+  "build": {
+    "appId": "com.archer.ai.desktop",
+    "productName": "Archer AI",
+    "copyright": "Copyright © 2024 Archer AI Team",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "files": [
+      "main.cjs",
+      "preload.cjs",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "assets/icon.png",
+      "artifactName": "archer-ai-${version}-setup.exe"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Archer AI"
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": ["arm64", "x64"]
+        }
+      ],
+      "icon": "assets/icon.png",
+      "category": "public.app-category.productivity"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "assets/icon.png",
+      "category": "Utility"
+    }
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0",
+    "cross-env": "^7.0.3"
+  }
+}
